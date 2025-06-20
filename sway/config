@@ -1,0 +1,146 @@
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+#   Global config
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+# Related to capslock remapping, see also
+# https://wiki.archlinux.org/title/Sway#Change_modifier_to_CapsLock_and_keep_Super
+input type:keyboard {
+    xkb_layout eu
+    xkb_options caps:super
+}
+
+set $mod Mod4
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+#   Status bar
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+# This font is widely installed, provides lots of unicode glyphs, right-to-left
+# text rendering and scalability on retina/hidpi displays (thanks to pango).
+
+#font pango:DejaVu Sans Mono 10
+
+bar {
+  mode hide
+  # position top
+  # mode dock
+  # tray {
+  #   position right
+  # }
+}
+
+# Disable title bar and set inner gaps 10, no extra gaps on the screen edge
+for_window [class="^.*"] border pixel 0
+gaps inner 10
+gaps outer 0
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+#   Floating windows
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+focus_follows_mouse yes
+
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+#   Hotkeys & control
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# Control
+bindsym $mod+Shift+q kill
+bindsym $mod+Shift+c reload
+bindsym $mod+Shift+r restart
+
+# Launchers
+bindsym $mod+Return exec foot
+bindsym $mod+d exec wofi --show run
+bindsym $mod+l exec swaylock
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+#   Focus & movement
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# change focus
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# move focused window
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# split in horizontal/vertical orientation
+bindsym $mod+h split h
+bindsym $mod+v split v
+
+# enter fullscreen mode - global means across all monitors
+bindsym $mod+f fullscreen toggle
+bindsym $mod+shift+f fullscreen toggle global
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+#   Workspaces
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# Multiple monitors can move the workspace using:
+bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
+bindsym $mod+3 workspace 3
+bindsym $mod+4 workspace 4
+bindsym $mod+5 workspace 5
+bindsym $mod+6 workspace 6
+bindsym $mod+p workspace p
+#bindsym $mod+6 workspace 6; move workspace to output DP-4
+#bindsym $mod+p workspace p; move workspace to output HDMI-0
+
+bindsym $mod+Shift+1 move container to workspace 1
+bindsym $mod+Shift+2 move container to workspace 2
+bindsym $mod+Shift+3 move container to workspace 3
+bindsym $mod+Shift+4 move container to workspace 4
+bindsym $mod+Shift+p move container to workspace p
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+#   Resizing windows
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+mode "resize" {
+        bindsym Left resize shrink width 2 ppt
+        bindsym Right resize grow width 2 ppt
+        bindsym Down resize shrink height 5 ppt
+        bindsym Up resize grow height 5 ppt
+
+        # back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+bindsym $mod+r mode "resize"
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+#   Autorun programs
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+# Start kanshi (make sure to kill first, otherwise config reloads will spawn a second instance)
+exec kanshi
+exec_always pkill swayosd-server; exec swayosd-server
+
+# Unlock keyring on login
+exec eval $(gnome-keyring-daemon --start)
+exec export SSH_AUTH_SOCK
+
+bindsym XF86AudioRaiseVolume exec swayosd-client --output-volume +2 --max-volume 50
+bindsym XF86AudioLowerVolume exec swayosd-client --output-volume -2 --max-volume 50
+bindsym XF86AudioMute exec swayosd-client --output-volume mute-toggle
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
+bindsym XF86MonBrightnessUp exec swayosd-client --brightness +10
+bindsym XF86MonBrightnessDown exec swayosd-client --brightness -10
+
+
+include /etc/sway/config.d/*

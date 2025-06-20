@@ -1,0 +1,4 @@
+#!/bin/zsh
+
+# Local applications in PATH
+export PATH=$PATH:/home/allan/.local/bin

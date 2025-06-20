@@ -1,0 +1,19 @@
+
+[default]
+baudrate = 115200
+map = OCRNL
+
+[stlink]
+baudrate = 115200
+device = /dev/serial/by-id/usb-STMicroelectronics_STLINK-V3_002200274D4B500E20373831-if01
+map = OCRNL
+
+[adp]
+baudrate = 115200
+map = OCRNL
+device = /dev/serial/by-id/usb-STMicroelectronics_STM32_Virtual_ComPort_206F36893331-if00
+
+[split]
+baudrate = 115200
+map = OCRNL
+device = /dev/serial/by-id/usb-STMicroelectronics_STM32_Virtual_ComPort_207236893331-if00

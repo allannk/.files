@@ -1,0 +1,10 @@
+#!/bin/zsh
+
+alias ls='ls -lah --color=auto'
+alias make='make -j$(nproc)'
+alias gs='git status'
+alias gd='git diff'
+alias ga='git add'
+alias gc='git commit'
+alias gp='git push'
+alias ss='grim -g "$(slurp)" - | wl-copy'

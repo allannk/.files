@@ -1,0 +1,5 @@
+#!/bin/zsh
+
+# Setup Zephyr environment
+ZEPHYR_CONF=~/.local/opt/zephyr-sdk-0.15.0-rc1/environment-setup-x86_64-pokysdk-linux
+[ -f $ZEPHYR_CONF ] && source $ZEPHYR_CONF 

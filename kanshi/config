@@ -1,0 +1,54 @@
+profile laptop {
+  output eDP-1 enable mode 1920x1200
+}
+
+profile work {
+  output 'Philips Consumer Electronics Company PHL 498P9 AU02322004843' {
+    enable
+    mode --custom 5120x1440@60.00Hz 
+    position 0,0
+  }
+  output eDP-1 {
+    enable
+    mode 1920x1200
+    position 5120,0
+  }
+}
+
+profile homeoffice-lg {
+  output eDP-1 {
+    enable
+    mode 1920x1200
+    position 0,0
+  }
+  output 'LG Electronics LG Ultra HD 0x000443EA' {
+    enable
+    mode --custom 2560x1440@60.00Hz
+    #mode --custom 3840x2160@25.00Hz
+    position 1920,0
+  }
+}
+
+profile homeofficeright {
+  output 'Samsung Electric Company U28E590 HTPHC08413' {
+    enable
+    mode 3840x2160
+    position 0,0
+  }
+  output eDP-1 {
+    disable
+  }
+}
+
+profile savvarksvej {
+  output 'Samsung Electric Company SMBX2331 0x42324335' {
+    enable
+    mode 1920x1080
+    position 0,0
+  }
+  output eDP-1 {
+    enable
+    mode 1920x1200
+    position 0,1080
+  }
+}

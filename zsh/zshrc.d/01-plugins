@@ -1,0 +1,10 @@
+autoload -U compinit && compinit
+autoload -Uz colors && colors
+
+# Initialize ZPLUG
+#source /usr/share/zsh/scripts/zplug/init.zsh
+#zplug "dracula/zsh", as:theme
+#zplug load
+
+
+
