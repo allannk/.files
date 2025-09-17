@@ -1,0 +1,47 @@
+" ========== configure paths ===========
+set rtp^=$XDG_CONFIG_HOME/vim " set runtime-path
+set nocompatible              " disable compatibility mode for old Vi
+set viminfo+=n$XDG_CACHE_HOME/vim/viminfo " move .viminfo to cache directory
+
+" ========== configure vim-plug ========
+if filereadable(expand("$XDG_CONFIG_HOME/vim/vim-plug.vim"))
+    source $XDG_CONFIG_HOME/vim/vim-plug.vim
+endif
+
+" ========== general configurations ====
+set number            " show line numbers
+set relativenumber    " show line numbers as diff from current line
+set hidden            " allow unwritten buffers in the background
+set nobackup          " do not create file~ backups (tilde files)
+set noundofile        " do not create .file.un~ 'undo'-files
+
+" ========== indentation ===============
+set expandtab         " expand tabs to spaces
+set tabstop=4         " character width of a tabstop
+set shiftwidth=4      " character width of general indentation
+
+filetype plugin indent on
+
+" ========== scrolling =================
+set scrolloff=8       " vertical scroll before reaching last line
+set sidescroll=1      " enable horizontal scrolling
+set sidescrolloff=15  " horizontal scroll before last column
+
+" ========== code folding ==============
+set foldmethod=syntax " Syntax based folding
+
+" ========== color =====================
+:syntax on            " enable syntax highlight
+:color dracula        " use color scheme
+
+" ========== keybindings ===============
+map <C-n> :NERDTreeToggle<CR>
+nnoremap <Tab> :bnext<CR>
+nnoremap <S-Tab> :bprevious<CR>
+" nnoremap <C-x> :bdelete<CR>
+nnoremap <C-x> :bprevious\|bdelete #<CR>
+
+" ========== configure plugins =========
+for fpath in split(globpath('$XDG_CONFIG_HOME/vim/plugins', '*.vim'), '\n')
+    exe 'source' fpath
+endfor
