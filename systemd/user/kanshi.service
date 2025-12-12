@@ -1,0 +1,16 @@
+[Unit]
+Description=Dynamic display configuration (kanshi)
+After=graphical-session.target
+PartOf=graphical-session.target
+
+[Service]
+Type=simple
+# Wait until the Wayland socket exists (Sway is running)
+ExecStartPre=/bin/sh -c 'until swaymsg -t get_outputs > /dev/null 2>&1; do sleep 0.5; done'
+Environment=WAYLAND_DISPLAY=wayland-1
+Environment=XDG_RUNTIME_DIR=%t
+ExecStart=/usr/bin/kanshi
+Restart=on-failure
+
+[Install]
+WantedBy=graphical-session.target

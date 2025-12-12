@@ -1,0 +1,11 @@
+[Unit]
+Description=SwayOSD server for media & special function controls
+After=swayosd-libinput-backend.service
+
+[Service]
+Type=simple
+ExecStart=swayosd-server
+Restart=on-failure
+
+[Install]
+WantedBy=default.target

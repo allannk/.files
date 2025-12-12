@@ -49,6 +49,19 @@ profile savvarksvej {
   output eDP-1 {
     enable
     mode 1920x1200
-    position 0,1080
+    position 1920,0
+  }
+}
+
+profile sydney {
+  output eDP-1 {
+    enable
+    mode 1920x1200
+    position 0,0
+  }
+  output 'LG Electronics LG TV 0x01010101' {
+    enable
+    mode 3840x2160
+    position 1920,0
   }
 }

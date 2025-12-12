@@ -30,6 +30,8 @@ bar {
 }
 
 # Disable title bar and set inner gaps 10, no extra gaps on the screen edge
+# smart_borders on
+# default_border none
 for_window [class="^.*"] border pixel 0
 gaps inner 10
 gaps outer 0
@@ -70,6 +72,7 @@ bindsym $mod+Left focus left
 bindsym $mod+Down focus down
 bindsym $mod+Up focus up
 bindsym $mod+Right focus right
+bindsym $mod+a focus parent
 
 # move focused window
 bindsym $mod+Shift+Left move left
@@ -80,6 +83,10 @@ bindsym $mod+Shift+Right move right
 # split in horizontal/vertical orientation
 bindsym $mod+h split h
 bindsym $mod+v split v
+bindsym $mod+t layout tabbed
+
+# experimental
+bindsym $mod+b border toggle
 
 # enter fullscreen mode - global means across all monitors
 bindsym $mod+f fullscreen toggle
@@ -103,6 +110,8 @@ bindsym $mod+Shift+1 move container to workspace 1
 bindsym $mod+Shift+2 move container to workspace 2
 bindsym $mod+Shift+3 move container to workspace 3
 bindsym $mod+Shift+4 move container to workspace 4
+bindsym $mod+Shift+5 move container to workspace 5
+bindsym $mod+Shift+6 move container to workspace 6
 bindsym $mod+Shift+p move container to workspace p
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
