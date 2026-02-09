@@ -60,8 +60,10 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 
 # Launchers
-bindsym $mod+Return exec foot
-bindsym $mod+d exec wofi --show run
+bindsym $mod+Return exec ghostty
+bindsym $mod+Shift+Return exec foot
+bindsym $mod+Shift+d exec wofi --show run
+bindsym $mod+d exec fuzzel
 bindsym $mod+l exec swaylock
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
