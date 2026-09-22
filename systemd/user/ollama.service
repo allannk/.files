@@ -1,0 +1,15 @@
+[Unit]
+Description=Ollama Service (user)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+ExecStart=/usr/bin/ollama serve
+Environment="OLLAMA_MODELS=%h/.local/share/ollama/models"
+Environment="OLLAMA_CONTEXT_LENGTH=32768"
+Environment="OLLAMA_VULKAN=1"
+Restart=on-failure
+RestartSec=3
+
+[Install]
+WantedBy=default.target

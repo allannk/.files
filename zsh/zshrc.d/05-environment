@@ -2,26 +2,28 @@
 
 export LANG="en_US.UTF-8"
 export VISUAL="vim"
-export TF_CPP_MIN_LOG_LEVEL=2
+
 export DOTFILEDIR=$(realpath $(dirname $0)/../..)
-export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 
 export XDG_CONFIG_HOME=$HOME/.config
 export XDG_CACHE_HOME=$HOME/.cache
 export XDG_DATA_HOME=$HOME/.local/share
 export XDG_STATE_HOME=$HOME/.local/state
 
-# GitHub Copilot CLI: keep out of $HOME, relocate whole config dir under .config
+export PATH="$PATH:$HOME/.local/bin"
+
+# Keep application configs in $HOME/.config
 export COPILOT_HOME=$HOME/.config/copilot
+export NPM_CONFIG_USERCONFIG=$XDG_CONFIG_HOME/npm/npmrc
+export NPM_CONFIG_PREFIX=$HOME/.local
+export NPM_CONFIG_CACHE=$XDG_CACHE_HOME/npm
+
+
 
 export SSH_AUTH_SOCK=$XDG_RUNTIME_DIR/ssh-agent.socket
 
 # CubeIDE dislikes wayland for it's WEBKIT based widgets
 export WEBKIT_DISABLE_COMPOSITING_MODE=0
-
-#if [ -f ~/.environment ]; then
-#    source ~/.environment
-#fi
 
 # Configure Modules
 compinit -d $HOME/.cache/zcompdump

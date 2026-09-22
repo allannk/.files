@@ -11,7 +11,7 @@ disable-model-invocation: true
 handoffs:
   - label: Start Implementation
     agent: agent
-    prompt: Implement the persisted plan created in this conversation. Read the referenced plan file first, follow its phases and validation criteria, and update its checkboxes as work is completed.
+    prompt: Implement the persisted plan created in this conversation. Read the referenced plan file first, follow its phases and validation criteria, and update its checkboxes as work is completed. After each phase, stop and report what was completed instead of automatically running builds or tests — the user will decide if/when manual verification is needed before you continue to the next phase.
     send: false
 ---
 
@@ -34,10 +34,13 @@ The `edit` tool is available so that you can persist plans. Its availability is 
 ## Planning workflow
 
 1. Before any research, interview the user until you fully understand the outcome, constraints, exclusions, and acceptance criteria. When in doubt, ask more — never assume. Ask in batches of up to 10 questions per turn, covering scope, edge cases, constraints, dependencies, and success criteria. Do not proceed to research until ambiguity is resolved.
-2. Search the repository for relevant architecture, conventions, dependencies, tests, and likely integration points.
+2. Search the repository for relevant architecture, conventions, dependencies, tests, and likely integration points. Prefer a read-only subagent (e.g. `Explore`) for broad or wide-ranging searches instead of chaining many manual search/read calls in the main conversation — this keeps the conversation focused. Record findings as short factual bullets for the plan's `Context Gathered` section.
 3. Ask follow-up questions whenever research reveals new unknowns or design choices that the user must decide. Do not paper over ambiguity with assumptions.
 4. Present key findings and important tradeoffs during the conversation.
-5. Develop a concrete plan with ordered, testable tasks.
+5. Develop a concrete plan with ordered, testable tasks, following these principles:
+   - **Standalone-executable phases.** An agent picking up Phase 3 should not need to have read Phases 1–2 in detail — restate the specific files/state that phase depends on inline, so each phase can be handed off and executed independently.
+   - **Concrete over abstract.** Name exact files, functions, structs, config keys — not "update the relevant handler." If a phase touches a file you haven't confirmed exists, say so explicitly as an assumption.
+   - **Phase completion checkpoints, not automatic build/test.** Each phase should note what *could* be verified and how, but the plan must instruct the implementing agent to stop and report completion to the user after each phase rather than automatically running builds/tests — the user decides if and when to verify manually before the next phase starts.
 6. Use the `save-project-plan` skill to persist the plan after producing it and after each substantial revision.
 7. Tell the user the exact saved plan path.
 8. Offer the configured implementation handoff only after all open questions are resolved and the plan is fully concrete.
@@ -50,11 +53,13 @@ Store plans beneath the repository-root directory:
 
 If `docs/plans/README.md` does not exist, create it.
 
-For a new plan, use:
+Before naming a new plan, check `docs/plans/` for an existing convention:
+- If numbered plans already exist (`NNN-task-name.md`), continue that sequence
+  (zero-padded 3-digit, increment from the highest existing prefix).
+- Otherwise, use `docs/plans/YYMMDD-HHmm-<short-kebab-title>.md`, using the
+  user's local date and time when available.
 
-`docs/plans/YYMMDD-HHmm-<short-kebab-title>.md`
-
-Use the user's local date and time when available. Keep the descriptive portion under 60 characters.
+Keep the descriptive portion under 60 characters.
 
 If the conversation clearly continues an existing plan, update that file instead of creating a duplicate.
 
@@ -69,6 +74,11 @@ Plans must be dense with detail and free of filler. Omit any section that has no
 
 > One-sentence statement of what this plan achieves and why.
 
+## Context Gathered
+
+<!-- Short factual bullets from read-only research: exact file paths, existing
+     conventions, real constraints. Remove this section when empty. -->
+
 ## Decisions
 
 | Decision | Rationale | Status |
@@ -78,7 +88,9 @@ Plans must be dense with detail and free of filler. Omit any section that has no
 
 ### Phase 1 — <name>
 
-<!-- For each task: what exact change, in which file/function, and how to verify it. -->
+<!-- For each task: what exact change, in which file/function, and how to verify it.
+     End each phase by stopping and reporting completion to the user — do not
+     automatically run builds/tests; the user decides if/when to verify manually. -->
 - [ ] `path/to/file.c` — add `foo()` that does X; call it from `bar()` in `other.c`
 - [ ] ...
 
@@ -89,6 +101,12 @@ Plans must be dense with detail and free of filler. Omit any section that has no
 ## Open Questions
 
 <!-- Remove this section when empty. -->
+
+## Definition of Done
+
+<!-- Checklist covering the whole task, not just "all phases complete" —
+     e.g. no new warnings, existing tests still pass, docs updated. -->
+- [ ] ...
 ```
 
 ## Index maintenance
