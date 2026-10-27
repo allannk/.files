@@ -1,0 +1,299 @@
+/* Overall document */
+
+body {
+  max-width: 1050px;
+  margin: 0 auto;
+  padding: 42px 56px;
+
+  font-size: 14px;
+  line-height: 1.65;
+
+  color: #d8dee9;
+  background:
+    radial-gradient(circle at top right, rgba(100, 110, 125, 0.07), transparent 34rem),
+    #23262e;
+}
+
+/* Headings */
+
+h1,
+h2,
+h3,
+h4 {
+  color: #eceff4;
+  letter-spacing: -0.02em;
+}
+
+h1 {
+  padding-bottom: 0.4em;
+  border-bottom: 2px solid #606878;
+}
+
+h2 {
+  margin-top: 2em;
+  padding-bottom: 0.3em;
+  border-bottom: 1px solid rgba(163, 190, 140, 0.5);
+}
+
+h3 {
+  color: #88c0d0;
+}
+
+h4 {
+  color: #ebcb8b;
+}
+
+/* Regular inline code */
+
+:not(pre) > code {
+  padding: 0.18em 0.42em !important;
+  border: 1px solid #484f5c !important;
+  border-radius: 5px !important;
+
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace !important;
+  font-size: 0.875em;
+
+  color: #ebcb8b !important;
+  background: #353a46 !important;
+}
+
+/* Fenced code blocks */
+
+pre {
+  margin: 1.3em 0 !important;
+  padding: 1.1em 1.25em !important;
+
+  border: 1px solid #404650 !important;
+  border-left: 4px solid #606878 !important;
+  border-radius: 8px !important;
+
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace !important;
+  font-size: 0.9em;
+
+  background: #2c303a !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+}
+
+pre code {
+  font-family: inherit !important;
+  color: #e5e9f0 !important;
+  background: transparent !important;
+}
+
+/* Bold and italic text */
+
+strong {
+  color: #eceff4;
+  font-weight: 700;
+}
+
+em {
+  color: #b48ead;
+}
+
+/* Links */
+
+a {
+  color: #88c0d0 !important;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+a:hover {
+  color: #8fbcbb !important;
+}
+
+/* Tables */
+
+table {
+  width: 100%;
+  margin: 1.4em 0;
+
+  border-spacing: 0;
+  border-collapse: separate;
+  overflow: hidden;
+
+  border: 1px solid #404650 !important;
+  border-radius: 8px;
+}
+
+thead tr {
+  background: #353b45 !important;
+}
+
+th {
+  color: #eceff4;
+  font-weight: 700;
+}
+
+th,
+td {
+  padding: 0.7em 0.9em !important;
+  border-color: #404650 !important;
+}
+
+tbody tr:nth-child(odd) {
+  background: rgba(55, 60, 68, 0.4) !important;
+}
+
+tbody tr:nth-child(even) {
+  background: rgba(62, 67, 74, 0.3) !important;
+}
+
+tbody tr:hover {
+  background: rgba(80, 90, 105, 0.2) !important;
+}
+
+/* Quotes and callouts */
+
+blockquote {
+  margin-left: 0;
+  padding: 0.8em 1.1em;
+
+  color: #c8d0dc !important;
+  background: rgba(57, 62, 72, 0.8);
+  border-left: 4px solid #b48ead !important;
+  border-radius: 0 6px 6px 0;
+}
+
+/* Horizontal separators */
+
+hr {
+  height: 1px !important;
+  margin: 2.4em 0 !important;
+
+  background: linear-gradient(
+    to right,
+    transparent,
+    #606878,
+    transparent
+  ) !important;
+
+  border: 0 !important;
+}
+
+/* Task lists */
+
+input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+
+  width: 0.95em;
+  height: 0.95em;
+  margin: 0 0.4em 0.1em 0;
+
+  vertical-align: middle;
+  position: relative;
+  flex-shrink: 0;
+
+  border: 1.5px solid #606878;
+  border-radius: 3px;
+  background: transparent;
+  cursor: default;
+}
+
+input[type="checkbox"]:checked {
+  background: #88c0d0;
+  border-color: #88c0d0;
+}
+
+input[type="checkbox"]:checked::after {
+  content: '';
+  position: absolute;
+  left: 0.16em;
+  top: 0.01em;
+
+  width: 0.28em;
+  height: 0.52em;
+
+  border-right: 0.13em solid #23262e;
+  border-bottom: 0.13em solid #23262e;
+  transform: rotate(45deg);
+}
+
+/* Completed tasks */
+
+li:has(input[type="checkbox"]:checked) {
+  color: #7f8798;
+  text-decoration: line-through;
+}
+
+/* Images and Mermaid diagrams */
+
+img,
+.mermaid {
+  padding: 1em;
+
+  background: #2c303a;
+  border: 1px solid #404650;
+  border-radius: 8px;
+}
+
+/* YAML front matter, when visible */
+
+pre.front-matter {
+  opacity: 0.7;
+}
+
+/* Keyboard shortcuts */
+
+kbd {
+  display: inline-block;
+  padding: 0.1em 0.4em;
+
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace;
+  font-size: 0.8em;
+
+  color: #c8d0dc;
+  background: #2c303a;
+  border: 1px solid #606878;
+  border-bottom-width: 3px;
+  border-radius: 4px;
+}
+
+/* Strikethrough */
+
+del {
+  color: #7f8798;
+}
+
+/* Highlighted text (Obsidian ==mark== / <mark>) */
+
+mark {
+  padding: 0 0.15em;
+
+  color: #eceff4;
+  background: rgba(235, 203, 139, 0.22);
+  border-radius: 2px;
+}
+
+/* Collapsible sections (<details> / GitHub) */
+
+details {
+  margin: 0.8em 0;
+  padding: 0.6em 1em;
+
+  background: rgba(57, 62, 72, 0.6);
+  border: 1px solid #404650;
+  border-radius: 6px;
+}
+
+details[open] summary {
+  margin-bottom: 0.6em;
+}
+
+summary {
+  cursor: pointer;
+  color: #88c0d0;
+  font-weight: 600;
+}
+
+summary:hover {
+  color: #8fbcbb;
+}
+
+/* List markers */
+
+li::marker {
+  color: #606878;
+}
