@@ -20,9 +20,17 @@ You implement one phase of a `docs/plans/` document in the `save-project-plan` f
 - Treat each phase as standalone: don't assume you've read other phases in detail. If the target phase's own text doesn't restate a piece of state/context it depends on, and you can't find it in the repo, stop and ask rather than guessing.
 - Never start another phase after completing the selected phase; wait for a new request.
 
+## Branch preparation
+
+- After resolving the plan and phase, but before implementation edits, resolve the plan's proposed branch name and any explicit user override. The override takes precedence. If an older plan has no proposal and the user has not supplied a name, ask for a compliant name rather than guessing.
+- Require a short, descriptive name with a short prefix such as `bug-` or `ft-`, using lowercase ASCII words separated by single dashes. Names must match `^[a-z]+-[a-z0-9]+(?:-[a-z0-9]+)*$`: no slashes, underscores, whitespace, or other separators. If a proposal or override is invalid, ask for a compliant replacement before proceeding.
+- Inspect the current branch, worktree, and whether the selected branch already exists. Create or reuse the selected branch before product edits, preserving unrelated user changes. Reuse an existing branch only when its ownership and relationship to the plan are clear. Do not rename an existing branch or switch away from unrelated work silently; ask when branch ownership, worktree safety, the starting point, or branch choice is unclear. Do not stash, reset, or discard user changes to make a switch work.
+- For later phases, inspect Git state again and keep using the selected plan branch. If the current branch differs from the branch used for a completed phase, or an override would change that branch, ask before switching; do not silently move the ongoing work to another branch.
+- Branch preparation does not authorize commits, pushes, or PR creation. Do not perform those operations automatically.
+
 ## Rules
 
-1. Resolve the plan file. A path or plan number/name is optional if exactly one plan is identifiable from the conversation; otherwise ask. A bare number or short name (e.g. "plan 007", "007", "the eeprom-writes plan") refers to `docs/plans/NNN-task-name.md`, matched by numeric prefix or filename substring. If more than one file matches, or none do, list the candidates or ask before proceeding.
+1. Resolve the plan file. A path or plan number/name is optional if exactly one plan is identifiable from the conversation; otherwise ask. A bare number or short name (e.g. "plan 2AE3", "2AE3", "the eeprom-writes plan") refers to `docs/plans/xxxx-task-name.md`, matched by hex prefix or filename substring. If more than one file matches, or none do, list the candidates or ask before proceeding.
 2. Resolve the phase by its unique name or number. A number such as "phase 4" matches the `### Phase 4 — <name>` heading. For "next phase", use the phase immediately after the last completed phase known from this conversation; if that is not known, use the first unchecked phase of the identified plan only when it is unambiguous. If no phase was specified or clearly implied, or the match is ambiguous, ask. If the named or numbered phase does not exist, list the available ones.
 3. Read the located phase's section and locate its checklist. If the plan path or phase is still ambiguous or not found, ask before proceeding.
 4. If the phase's instructions don't match what's actually in the repo (missing file, stale assumption, already done, etc.), stop and flag the mismatch instead of improvising a broad fix.
