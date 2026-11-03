@@ -61,10 +61,13 @@ Present one publication proposal containing:
 - Remote and exact source ref for any normal push; omit pushing if the required source is already published.
 - Host/repository, source and target branches, final title/description, create versus update, draft/ready state, and specified reviewers/work items.
 - Validation failures, omissions, or explicit waivers. Propose a draft if required validation is incomplete; never silently mark it ready.
+- An optional return to local `main` after verified submission, if desired. Include it in this approval rather than adding a separate stage or prompt.
 
 Ask once for the whole publication batch. After approval, stage only the approved scope, commit if approved, push if approved, and create/update the PR without further per-step confirmation. Do not broaden scope or commit unrelated staged work. If the user approves only PR creation, leave local edits and commits untouched.
 
 Verify the returned PR identity, URL, branches, and draft/ready state once. Do not turn this into CI polling or extra remote queries unless requested or the result is ambiguous.
+
+If returning to `main` was approved, run only `git switch main` after verified submission, provided the current branch is still the PR source, HEAD matches the published source commit, the worktree and index are clean (including untracked files), and local `main` exists. Reuse the verified publication result; do not add another remote-ref lookup. If already on `main`, do nothing. If any prerequisite fails or the switch fails, stay on the current branch and report why. Never stash, discard changes, pull, force the switch, or delete feature branches to make the return possible. Report the resulting local branch; returning does not imply the PR is merged or CI passed.
 
 ## Keep the Flow Small
 
@@ -72,4 +75,4 @@ Verify the returned PR identity, URL, branches, and draft/ready state once. Do n
 - Do not routinely hash files, run checksum sweeps, refetch remote refs, enumerate Ninja regeneration dependencies, compare every build-input timestamp, or inspect toolchain logs. Investigate configuration only when there is evidence of a problem.
 - Before publication, use one local HEAD/status check and a targeted comparison of approved dirty/staged/untracked content when needed. Do not treat status alone as proof that already-dirty content is unchanged. Refresh review and validation only for actual changes or a source/target revision change; no routine file fingerprints.
 - Briefly announce batches and report meaningful progress or blockers. Do not require a report after every stage or repeat unchanged plans and approval requests.
-- Final output: PR description or clickable PR URL, source/base, checks marked **PASSED**, **FAILED**, **NOT RUN**, or **WAIVED** with reasons, coverage of HEAD versus working-tree changes, and remaining work. Separate compilation, automated tests, user-reported hardware checks, and CI evidence. Never claim results without evidence.
+- Final output: PR description or clickable PR URL, source/base, current local branch, checks marked **PASSED**, **FAILED**, **NOT RUN**, or **WAIVED** with reasons, coverage of HEAD versus working-tree changes, and remaining work. Separate compilation, automated tests, user-reported hardware checks, and CI evidence. Never claim results without evidence.

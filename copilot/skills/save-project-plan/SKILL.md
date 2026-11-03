@@ -12,7 +12,7 @@ Persist the plan developed in the current conversation. This skill owns the plan
 
 Store plans under the repository-root `docs/plans/` directory. Create or maintain `docs/plans/README.md` with the index format below.
 
-Name new plans `NNN-task-name.md`: use a zero-padded 3-digit sequence number one higher than the highest existing prefix in `docs/plans/*.md` (start at `001` if none exist), plus a short kebab-case slug under 60 characters. If the conversation continues an existing plan or supplies its path, update that plan instead of creating a duplicate. Never overwrite an unrelated plan.
+Name new plans `xxxx-task-name.md`: use a unique 4-digit hex number, plus a short kebab-case slug under 60 characters. If the conversation continues an existing plan or supplies its path, update that plan instead of creating a duplicate. Never overwrite an unrelated plan.
 
 ## Plan content
 

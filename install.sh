@@ -15,5 +15,10 @@ ln -fs $REPO/tio $XDG_CONFIG_HOME/tio
 ln -fs $REPO/zsh $XDG_CONFIG_HOME/zsh
 ln -fs $REPO/systemd $XDG_CONFIG_HOME/systemd
 
+# PrusaSlicer settings (move any existing real directory aside first)
+config_home="${XDG_CONFIG_HOME:-$HOME/.config}"
+mkdir -p "$config_home"
+ln -sfnT "$REPO/prusa-slicer" "$config_home/PrusaSlicer"
+
 # TODO:
 # - systemd default.target.wants could be populated by services from this repo
