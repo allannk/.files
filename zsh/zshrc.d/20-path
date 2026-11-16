@@ -2,3 +2,4 @@
 
 # Local applications in PATH
 export PATH=$PATH:/home/allan/.local/bin
+export PATH=$PATH:/home/allan/.local/share/pi/bin/

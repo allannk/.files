@@ -2,10 +2,7 @@
 name: xalyn-planner
 description: Research the workspace, develop an implementation plan, and persist the plan under docs/plans without modifying product code.
 argument-hint: "Describe the feature, refactor, bug, or architectural change to plan"
-tools:
-  - search
-  - read
-  - edit
+tools: [vscode/runCommand, vscode/vscodeAPI, vscode/askQuestions, execute, read, agent, edit, search]
 user-invocable: true
 disable-model-invocation: true
 handoffs:
