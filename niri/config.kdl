@@ -13,19 +13,7 @@ input {
         xkb {
             layout "eu"
             options "caps:super"
-            // You can set rules, model, layout, variant and options.
-            // For more information, see xkeyboard-config(7).
-
-            // For example:
-            // layout "us,ru"
-            // options "grp:win_space_toggle,compose:ralt,ctrl:nocaps"
-
-            // If this section is empty, niri will fetch xkb settings
-            // from org.freedesktop.locale1. You can control these using
-            // localectl set-x11-keymap.
         }
-
-        // Enable numlock on startup, omitting this setting disables it.
         numlock
     }
 
@@ -414,10 +402,10 @@ binds {
     //Mod+Q repeat=false { close-window; }
     Mod+Shift+Q repeat=false { close-window; }
 
-    Mod+Left  { focus-column-left; }
+    Mod+Left  { focus-column-or-monitor-left; }
     Mod+Down  { focus-window-down; }
     Mod+Up    { focus-window-up; }
-    Mod+Right { focus-column-right; }
+    Mod+Right { focus-column-or-monitor-right; }
     Mod+H     { focus-column-left; }
     Mod+J     { focus-window-down; }
     Mod+K     { focus-window-up; }
